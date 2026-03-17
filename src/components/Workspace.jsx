@@ -30,7 +30,7 @@ export const IdContext = createContext({ gistId: "", setGistId: () => {} });
 
 const SIDEPANEL_MIN_WIDTH = 384;
 
-export default function WorkSpace() {
+export default function WorkSpace({ openWechatPopup }) {
   const [id, setId] = useState(0);
   const [gistId, setGistId] = useState("");
   const [loadedFromGistId, setLoadedFromGistId] = useState("");
@@ -422,6 +422,7 @@ export default function WorkSpace() {
             setTitle={setTitle}
             lastSaved={lastSaved}
             setLastSaved={setLastSaved}
+            openWechatPopup={openWechatPopup}
           />
           <div
             className="flex h-full overflow-y-auto"

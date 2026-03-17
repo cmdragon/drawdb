@@ -1,23 +1,38 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import Editor from "./pages/Editor";
 import BugReport from "./pages/BugReport";
 import Templates from "./pages/Templates";
 import SettingsContextProvider from "./context/SettingsContext";
 import { useSettings } from "./hooks";
 import NotFound from "./pages/NotFound";
+import WechatPopup from "./components/WechatPopup";
 
 export default function App() {
+  const [wechatPopupVisible, setWechatPopupVisible] = useState(true);
+
+  const openWechatPopup = () => {
+    setWechatPopupVisible(true);
+  };
+
+  const closeWechatPopup = () => {
+    setWechatPopupVisible(false);
+  };
+
   return (
     <SettingsContextProvider>
       <BrowserRouter>
         <RestoreScroll />
+        <WechatPopup 
+          isVisible={wechatPopupVisible} 
+          onClose={closeWechatPopup} 
+        />
         <Routes>
           <Route
             path="/"
             element={
               <ThemedPage>
-                <Editor />
+                <Editor openWechatPopup={openWechatPopup} />
               </ThemedPage>
             }
           />

@@ -12,7 +12,7 @@ import SaveStateContextProvider from "../context/SaveStateContext";
 import EnumsContextProvider from "../context/EnumsContext";
 import WorkSpace from "../components/Workspace";
 
-export default function Editor() {
+export default function Editor({ openWechatPopup }) {
   useEffect(() => {
     document.title = "drawDB | Online database diagram editor and SQL generator";
   }, []);
@@ -29,7 +29,7 @@ export default function Editor() {
                     <EnumsContextProvider>
                       <TablesContextProvider>
                         <SaveStateContextProvider>
-                          <WorkSpace />
+                          <WorkSpace openWechatPopup={openWechatPopup} />
                         </SaveStateContextProvider>
                       </TablesContextProvider>
                     </EnumsContextProvider>
