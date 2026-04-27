@@ -86,7 +86,6 @@ export default function ControlPanel({
   title,
   setTitle,
   lastSaved,
-  openWechatPopup,
 }) {
   const [modal, setModal] = useState(MODAL.NONE);
   const [sidesheet, setSidesheet] = useState(SIDESHEET.NONE);
@@ -1667,15 +1666,7 @@ export default function ControlPanel({
               <i className="fa-solid fa-circle-half-stroke" />
             </button>
           </Tooltip>
-          <Divider layout="vertical" margin="8px" />
-          <Tooltip content="微信公众号" position="bottom">
-            <button
-              className="py-1 px-2 hover-2 rounded-sm text-xl -mt-0.5"
-              onClick={openWechatPopup}
-            >
-              <i className="fa-brands fa-weixin" />
-            </button>
-          </Tooltip>
+
         </div>
         <button
           onClick={() => invertLayout("header")}
