@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import {
   IconCaretdown,
   IconChevronRight,
@@ -9,7 +9,6 @@ import {
   IconUndo,
   IconRedo,
   IconEdit,
-  IconShareStroked,
 } from "@douyinfe/semi-icons";
 import { Link, useNavigate } from "react-router-dom";
 import icon from "../../assets/icon_dark_64.png";
@@ -97,7 +96,22 @@ export default function ControlPanel({
     extension: "",
   });
   const [importFrom, setImportFrom] = useState(IMPORT_FROM.JSON);
+  const adRef = useRef(null);
   const { saveState, setSaveState } = useSaveState();
+
+  useEffect(() => {
+    const initializeAd = () => {
+      if (adRef.current && window.adsbygoogle) {
+        const width = adRef.current.offsetWidth;
+        if (width > 0) {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } else {
+          setTimeout(initializeAd, 100);
+        }
+      }
+    };
+    initializeAd();
+  }, []);
   const { layout, setLayout } = useLayout();
   const { settings, setSettings } = useSettings();
   const {
@@ -1464,6 +1478,17 @@ export default function ControlPanel({
             </div>
           </div>
         )}
+        <div className="flex justify-center py-2">
+          <ins
+            ref={adRef}
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-2874982874195135"
+            data-ad-slot="5779247383"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+        </div>
         {layout.toolbar && toolbar()}
       </div>
       <Modal
